@@ -1,0 +1,101 @@
+body {
+    width: 100vw;/*100% of the visible width of the page*/
+    height: 100vh;/*100% of the visible height of the page*/
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    color: #000;
+}
+.bg-video-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /*to hide some parts of the video*/
+    position: absolute; /*to place clock on the video*/
+    left: 0; /*to place the video on the left side*/
+    top: 0;/*to place the video on the upper side*/
+    z-index: -2; /*so that video is behind the clock*/
+}
+.bg-video {
+    width: 100%; /*100% of the bg-video-container*/
+    height: 100%;
+    object-fit: cover; /*property is used to specify how an <img> or <video> should be resized to fit its container*/
+    object-position: center; /*to center the video on webpage*/
+}
+.clock_face { /*the main (outter) cirle of the clock and countdown*/
+    width: 80vmin;
+    height: 80vmin;
+    border: 2px solid rgb(172, 96, 96);
+    border-radius: 50%;
+    position: relative;
+    display: flex; /*to enable centering vertically and horizontally*/
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.clock_face::before { /* white dot in the center of the clock*/
+    content: ''; /*obligatory property for pseudo-element*/
+    display: block;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    left: calc(50% - 10px); /* 50% - to put at the center and 10px left and 10px right*/
+    top: calc(50% - 10px); /*same as above*/
+    background-color: rgb(255, 255, 255);
+}
+.clock_face::after { /* the second (inner) circle of the clock*/
+    content: '';
+    display: block;
+    position: absolute;
+    width: 96%;/*of the main circle*/
+    height: 96%;
+    left: 2%; /*to center-align the block horizontally (100%-98%=2% and 1% on the left and 1% on the right*/
+    top: 2%; /*same as above, i.e. 1% on top and 1% on bottom*/
+    border-radius: 50%;
+    border: 1px solid #fff;
+}
+.clock_heading { /*Heading - 'Clock'*/
+    font-weight: 100;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-bottom: 20vmin;
+}
+.clock_hand { /* general styles for Clock: hours/minutes/seconds*/
+    background: silver;
+    position: absolute;
+    bottom: calc(50% - 40px); /*to touch and extend the lines beyond central dot*/
+}
+.clock-hours {
+    width: 4px;
+    height: 30%; /*of the clock-face height*/
+    left: calc(50% - 2px); /*to shift the line to touch the dot in the center (half of the width of 4px)*/
+    transform: rotate(100deg);
+    transform-origin: 2px calc(100% - 40px); /*to specify the white dot as the center in relation to which the hands will rotate*/
+}
+.clock-minutes {
+    width: 4px;
+    height: 40%; 
+    left: calc(50% - 2px);
+    transform-origin: 2px calc(100% - 40px); 
+}
+.clock-seconds {
+    width: 2px;
+    height: 50%; 
+    left: calc(50% - 1px);
+    transform: rotate(45deg);
+    transform-origin: 1px calc(100% - 40px); 
+}
+.countdown {
+    text-align: center; /*to center the text (Time left) and figures (days/hours/min/sec)*/
+}
+.countdown_heading { /* Heading - 'Time left'*/
+    font-weight: 100;
+    font-size: 18px;
+}
+.countdown_body {
+    display: flex;  /*make countdown figures (10:20:25:35) in one vertical line*/
+    font-size: 26px;
+    color:darkgreen
+}
